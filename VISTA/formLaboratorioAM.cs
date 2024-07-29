@@ -86,7 +86,7 @@ namespace VISTA
                             return;
                         }
                         laboratorio.Sede = ControladoraSede.Instancia.RecuperarSedes().FirstOrDefault(s => s.NombreSede.ToLower() == NombreSede.ToLower()); // se recupera la sede seleccionada del combobox de sedes para asignarla al laboratorio que se va a modificar
-                        laboratorio.CapacidadMaxima = (int)numCapacidad.Value;
+                        laboratorio.CapacidadMaxima = (int)numCapacidad.Value; 
                         laboratorio.NombreLaboratorio = txtNombreLaboratorio.Text;
 
                         var mensaje = ControladoraLaboratorio.Instancia.ModificarLaboratorio(laboratorio);
