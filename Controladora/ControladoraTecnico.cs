@@ -73,7 +73,7 @@ namespace Controladora
                 {
                     Context.Instancia.Tecnicos.Update(tecnico);
 
-                    int modificados = Context.Instancia.SaveChanges(); //guardo los cambios
+                    int modificados = Context.Instancia.SaveChanges(); 
 
                     if (modificados > 0)
                     {

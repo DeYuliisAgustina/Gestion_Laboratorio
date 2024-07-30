@@ -14,7 +14,6 @@ namespace VISTA
             dgvSede.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells; //con esto hago que las columnas se ajusten al contenido
         }
 
-        //Metodos para mover la ventana
         [DllImport("User32.DLL", EntryPoint = "ReleaseCapture")] //importo las librerias necesarias para mover la ventana
         private extern static void ReleaseCapture(); //metodo para mover la ventana
         [DllImport("User32.DLL", EntryPoint = "SendMessage")] //importo las librerias necesarias para mover la ventana

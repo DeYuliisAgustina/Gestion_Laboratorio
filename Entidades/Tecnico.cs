@@ -15,9 +15,9 @@ namespace Entidades
         public string NombreyApellido { get; set; }
         public long Dni { get; set; }
         public string Legajo { get; set; }
-        public int CantidadTickets { get; set; }
+        public int CantidadTickets { get; set; } 
 
-        public ICollection<Ticket> Tickets { get; set; } = new List<Ticket>(); //un soporte puede tener muchos tickets
+        public ICollection<Ticket> Tickets { get; set; } = new List<Ticket>(); //un tecnico puede tener muchos tickets
 
         public override string ToString()
         {

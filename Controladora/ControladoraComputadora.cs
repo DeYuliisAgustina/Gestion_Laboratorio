@@ -49,7 +49,7 @@ namespace Controladora
                 var laboratorioEncontrado = listaLaboratorios.FirstOrDefault(l => l.LaboratorioId == computadora.LaboratorioId); //busco el laboratorio por id para verificar que exista
                 if (laboratorioEncontrado != null)
                 {
-                    if (laboratorioEncontrado.Computadoras.Count < laboratorioEncontrado.CapacidadMaxima)
+                    if (laboratorioEncontrado.Computadoras.Count < laboratorioEncontrado.CapacidadMaxima) //verifico que la capacidad del laboratorio no se haya superado para agregar la computadora
                     {
                         var listaComputadoras = Context.Instancia.Computadoras.ToList().AsReadOnly();
                         var computadoraEncontrada = listaComputadoras.FirstOrDefault(c => c.CodigoComputadora.ToLower() == computadora.CodigoComputadora.ToLower() && c.LaboratorioId == computadora.LaboratorioId); //busco la computadora por codigo y laboratorio para verificar que no se repita
@@ -84,7 +84,6 @@ namespace Controladora
             }
         }
 
-        //hacer el metodo de modificar computadora
         public string ModificarComputadora(Computadora computadora)
         {
             try
@@ -118,7 +117,7 @@ namespace Controladora
             {
                 var listaComputadoras = Context.Instancia.Computadoras.ToList().AsReadOnly();
                 var computadoraEncontrada = listaComputadoras.FirstOrDefault(c => c.CodigoComputadora.ToLower() == computadora.CodigoComputadora.ToLower() && c.LaboratorioId == computadora.LaboratorioId); //busco la computadora por codigo y laboratorio para verificar que exista
-                if (computadoraEncontrada != null) //si la computadora existe, la elimino
+                if (computadoraEncontrada != null) 
                 {
                     Context.Instancia.Computadoras.Remove(computadora);
                     int insertados = Context.Instancia.SaveChanges();
@@ -138,20 +137,5 @@ namespace Controladora
                 return "Error desconocido";
             }
         }
-
-        public bool ComprobarComputadora(Computadora computadora)
-        {
-            var listaComputadoras = Context.Instancia.Computadoras.ToList().AsReadOnly();
-            var computadoraEncontrada = listaComputadoras.FirstOrDefault(c => c.CodigoComputadora.ToLower() == computadora.CodigoComputadora.ToLower() && c.CodigoComputadora == computadora.Laboratorio.NombreLaboratorio); //busco la computadora por codigo y laboratorio para verificar que no se repita
-            if (computadoraEncontrada == null)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
     }
 }

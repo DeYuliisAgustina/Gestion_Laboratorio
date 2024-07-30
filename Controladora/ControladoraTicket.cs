@@ -44,11 +44,10 @@ namespace Controladora
             try
             {
                 var listaTickets = Context.Instancia.Tickets.ToList().AsReadOnly();
-                var ticketEncontrado = Context.Instancia.Tickets.FirstOrDefault(t => t.TicketId == ticket.TicketId); // Verificar si el ticket ya existe en la base de datos 
+                var ticketEncontrado = Context.Instancia.Tickets.FirstOrDefault(t => t.TicketId == ticket.TicketId); // Verifico si el ticket ya existe 
                 if (ticketEncontrado == null)
                 {
-                    // Verificar si ya existe un ticket con el mismo código de computadora
-                    var ticketExistente = listaTickets.FirstOrDefault(t => t.Computadora.ComputadoraId == ticket.Computadora.ComputadoraId);
+                    var ticketExistente = listaTickets.FirstOrDefault(t => t.Computadora.ComputadoraId == ticket.Computadora.ComputadoraId); // Verifico si ya existe un ticket con el código de computadora
                     if (ticketExistente == null)
                     {
                         Context.Instancia.Tickets.Add(ticket);
@@ -81,7 +80,7 @@ namespace Controladora
             try
             {
                 var listaTickets = Context.Instancia.Tickets.ToList().AsReadOnly();
-                var ticketEncontrado = listaTickets.FirstOrDefault(t => t.Computadora.CodigoComputadora == ticket.Computadora.CodigoComputadora); // Verificar si el ticket ya existe en la base de datos
+                var ticketEncontrado = listaTickets.FirstOrDefault(t => t.Computadora.CodigoComputadora == ticket.Computadora.CodigoComputadora); // Verifico si el ticket ya existe 
                 if (ticketEncontrado != null)
                 {
                     Context.Instancia.Tickets.Update(ticket);
@@ -136,9 +135,9 @@ namespace Controladora
         {
             try
             {
-                var listaTickets = Context.Instancia.Tickets.ToList().AsReadOnly();
-                var ticketsPorTecnico = listaTickets.Where(t => t.Tecnico.TecnicoId == tecnico.TecnicoId).ToList();
-                return ticketsPorTecnico.Count;
+                var listaTickets = Context.Instancia.Tickets.ToList().AsReadOnly(); // Recupero todos los tickets 
+                var ticketsPorTecnico = listaTickets.Where(t => t.Tecnico.TecnicoId == tecnico.TecnicoId).ToList(); // Filtro los tickets por tecnico para contar los tickets que tiene asignados cada tecnico
+                return ticketsPorTecnico.Count; // Devuelvo la cantidad de tickets que tiene asignados el tecnico 
             }
             catch (Exception)
             {

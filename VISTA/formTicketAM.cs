@@ -55,7 +55,7 @@ namespace VISTA
                     cbCodigoPc.Items.Add(computadora.CodigoComputadora.ToString());
                 }
             };
-            foreach (Tipo tipo in Enum.GetValues(typeof(Tipo))) //se recorren los valores del enum de Categoria y se agregan al combobox de categorias
+            foreach (Tipo tipo in Enum.GetValues(typeof(Tipo))) //se ecorren los valores del enum de Categoria y se agregan al combobox de categorias
             {
                 cbTipoTicket.Items.Add(tipo.ToString());
             }
@@ -136,13 +136,13 @@ namespace VISTA
                         string codigoComputadora = cbCodigoPc.SelectedItem.ToString();
 
                         // Verificar si existe otro ticket con el mismo código de computadora
-                        if (ControladoraTicket.Instancia.RecuperarTicket().Any(t => t.Computadora.CodigoComputadora == codigoComputadora && t != ticket))
+                        if (ControladoraTicket.Instancia.RecuperarTicket().Any(t => t.Computadora.CodigoComputadora == codigoComputadora && t != ticket)) // Si existe otro ticket con el mismo código de computadora y no es el mismo ticket que se está modificando se muestra un mensaje de error 
                         {
                             MessageBox.Show("Ya existe otro ticket con el mismo código de computadora." + ticket.Computadora.CodigoComputadora, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             return;
                         }
                         ticket.NombreSede = cbSede.SelectedItem.ToString();
-                        ticket.Ubicacion = cbLaboratorio.SelectedItem.ToString();
+                        ticket.Ubicacion = cbLaboratorio.SelectedItem.ToString(); 
                         ticket.Computadora = ControladoraComputadora.Instancia.RecuperarComputadoras().FirstOrDefault(c => c.CodigoComputadora == cbCodigoPc.SelectedItem.ToString() && c.Laboratorio.NombreLaboratorio == cbLaboratorio.SelectedItem.ToString());
                         ticket.Tecnico = ControladoraTecnico.Instancia.RecuperarTecnicos().FirstOrDefault(t => t.NombreyApellido == cbTecnico.SelectedItem.ToString());
 
@@ -167,8 +167,8 @@ namespace VISTA
                 {
                     ticket.NombreSede = cbSede.SelectedItem.ToString();
                     ticket.Ubicacion = cbLaboratorio.SelectedItem.ToString();
-                    ticket.Computadora = ControladoraComputadora.Instancia.RecuperarComputadoras().FirstOrDefault(c => c.CodigoComputadora == cbCodigoPc.SelectedItem.ToString() && c.Laboratorio.NombreLaboratorio == cbLaboratorio.SelectedItem.ToString());
-                    ticket.Tecnico = ControladoraTecnico.Instancia.RecuperarTecnicos().FirstOrDefault(t => t.NombreyApellido == cbTecnico.SelectedItem.ToString());
+                    ticket.Computadora = ControladoraComputadora.Instancia.RecuperarComputadoras().FirstOrDefault(c => c.CodigoComputadora == cbCodigoPc.SelectedItem.ToString() && c.Laboratorio.NombreLaboratorio == cbLaboratorio.SelectedItem.ToString()); //se recupera la computadora seleccionada y se asigna al ticket 
+                    ticket.Tecnico = ControladoraTecnico.Instancia.RecuperarTecnicos().FirstOrDefault(t => t.NombreyApellido == cbTecnico.SelectedItem.ToString()); //se recupera el tecnico seleccionado y se asigna al ticket
 
                     ticket.DescripcionTicket = txtDescripcion.Text;
                     ticket.FechaCreacion = dtpFechaInicio.Value;

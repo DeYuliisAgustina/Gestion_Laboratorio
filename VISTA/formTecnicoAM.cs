@@ -7,7 +7,7 @@ namespace VISTA
 {
     public partial class formTecnicoAM : Form
     {
-        private Tecnico tecnico; // variable de tipo Sede para almacenar la sede que se va a modificar
+        private Tecnico tecnico; // variable de tipo tecnico para almacenar la sede que se va a modificar
         private bool modificar = false;
 
         public formTecnicoAM()
@@ -16,7 +16,6 @@ namespace VISTA
             tecnico = new Tecnico();
         }
 
-        //Metodos para mover la ventana
         [DllImport("User32.DLL", EntryPoint = "ReleaseCapture")] //importo las librerias necesarias para mover la ventana
         private extern static void ReleaseCapture(); //metodo para mover la ventana
         [DllImport("User32.DLL", EntryPoint = "SendMessage")] //importo las librerias necesarias para mover la ventana
@@ -35,7 +34,7 @@ namespace VISTA
             {
                 lblAgregaroModificar.Text = "Modificar Tecnico";
 
-                txtNombreyApellido.Text = tecnico.NombreyApellido;
+                txtNombreyApellido.Text = tecnico.NombreyApellido.ToString();
                 txtDni.Text = tecnico.Dni.ToString();
                 txtLegajo.Text = tecnico.Legajo.ToString();
             }
@@ -61,26 +60,23 @@ namespace VISTA
                     DialogResult result = MessageBox.Show("¿Está seguro de que desea modificar el Técnico?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                     if (result == DialogResult.Yes)
                     {
-                        if (ControladoraTecnico.Instancia.RecuperarTecnicos().Any(t => t.NombreyApellido.ToLower() == txtNombreyApellido.Text.ToLower()) && tecnico.NombreyApellido.ToLower() != txtNombreyApellido.Text.ToLower()) // Si el nombre y apellido ya existe y no es el mismo que el que se está modificando entonces mostrar mensaje de error 
+                        if (ControladoraTecnico.Instancia.RecuperarTecnicos().Any(t => t.NombreyApellido.ToLower() == txtNombreyApellido.Text.ToLower()) && tecnico.NombreyApellido.ToLower() != txtNombreyApellido.Text.ToLower()) // Si el nombre y apellido ya existe y no es el mismo que el que se está modificando entonces muestro mensaje de error 
                         {
-                            // Mostrar un mensaje de error indicando que ya existe otro tecnico con ese código
                             MessageBox.Show("Ya existe otro tecnico con el mismo nombre y apellido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             return;
                         }
-                        if (ValidaDNI(txtDni.Text) == false || txtDni.Text.Length > 9)
+                        if (ValidaDNI(txtDni.Text) == false || txtDni.Text.Length > 9)  //verifico que el DNI sea válido y que no tenga más de 9 caracteres 
                         {
                             MessageBox.Show("El DNI ingresado no es válido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             return;
                         }
                         if (ControladoraTecnico.Instancia.RecuperarTecnicos().Any(t => t.Dni == Convert.ToInt32(txtDni.Text)) && tecnico.Dni != Convert.ToInt32(txtDni.Text))
                         {
-                            // Mostrar un mensaje de error indicando que ya existe otro tecnico con ese código
                             MessageBox.Show("Ya existe otro tecnico con el mismo DNI.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             return;
                         }
                         if (ControladoraTecnico.Instancia.RecuperarTecnicos().Any(t => t.Legajo == txtLegajo.Text.ToLower() && tecnico.Legajo != txtLegajo.Text.ToLower()))
                         {
-                            // Mostrar un mensaje de error indicando que ya existe otro tecnico con ese código
                             MessageBox.Show("Ya existe otro tecnico con el mismo legajo.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             return;
                         }
@@ -104,19 +100,16 @@ namespace VISTA
 
                     if (ControladoraTecnico.Instancia.RecuperarTecnicos().Any(t => t.NombreyApellido.ToLower() == txtNombreyApellido.Text.ToLower()))
                     {
-                        // Mostrar un mensaje de error indicando que ya existe otro tecnico con ese código
                         MessageBox.Show("Ya existe otro tecnico con el mismo nombre y apellido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
                     if (ControladoraTecnico.Instancia.RecuperarTecnicos().Any(t => t.Dni == Convert.ToInt32(txtDni.Text)))
                     {
-                        // Mostrar un mensaje de error indicando que ya existe otro tecnico con ese código
                         MessageBox.Show("Ya existe otro tecnico con el mismo DNI.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
                     if (ControladoraTecnico.Instancia.RecuperarTecnicos().Any(t => t.Legajo == txtLegajo.Text.ToLower()))
                     {
-                        // Mostrar un mensaje de error indicando que ya existe otro tecnico con ese código
                         MessageBox.Show("Ya existe otro tecnico con el mismo legajo.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }

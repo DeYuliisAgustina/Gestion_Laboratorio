@@ -15,7 +15,6 @@ namespace VISTA
             sede = new Sede();
         }
 
-        //Metodos para mover la ventana
         [DllImport("User32.DLL", EntryPoint = "ReleaseCapture")] //importo las librerias necesarias para mover la ventana
         private extern static void ReleaseCapture(); //metodo para mover la ventana
         [DllImport("User32.DLL", EntryPoint = "SendMessage")] //importo las librerias necesarias para mover la ventana
@@ -79,12 +78,12 @@ namespace VISTA
                 else
                 {
                     sede.Universidad = ControladoraSede.Instancia.RecuperarUniversidad();
-                    if (ControladoraSede.Instancia.RecuperarSedes().Any(s => s.NombreSede.ToLower() == txtNombreSede.Text.ToLower()))
+                    if (ControladoraSede.Instancia.RecuperarSedes().Any(s => s.NombreSede.ToLower() == txtNombreSede.Text.ToLower())) //verifico que no exista una sede con el mismo nombre en la misma universidad 
                     {
                         MessageBox.Show("Ya existe una sede con ese nombre.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         return;
                     }
-                    if (ControladoraSede.Instancia.RecuperarSedes().Any(s => s.DireccionSede.ToLower() == txtDireccionSede.Text.ToLower()))
+                    if (ControladoraSede.Instancia.RecuperarSedes().Any(s => s.DireccionSede.ToLower() == txtDireccionSede.Text.ToLower())) //verifico que no exista una sede con la misma dirección en la misma universidad
                     {
                         MessageBox.Show("Ya existe una sede con esa dirección.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         return;

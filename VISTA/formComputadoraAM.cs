@@ -7,7 +7,7 @@ namespace VISTA
 {
     public partial class formComputadoraAM : Form
     {
-        private Computadora computadora; // variable de tipo Sede para almacenar la sede que se va a modificar
+        private Computadora computadora; // variable de tipo computadora para almacenar la sede que se va a modificar
         private bool modificar = false;
 
         public formComputadoraAM()
@@ -18,7 +18,7 @@ namespace VISTA
         }
 
         //Metodos para mover la ventana
-        [DllImport("User32.DLL", EntryPoint = "ReleaseCapture")] //importo las librerias necesarias para mover la ventana
+        [DllImport("User32.DLL", EntryPoint = "ReleaseCapture")] //importo las librerias para mover la ventana
         private extern static void ReleaseCapture(); //metodo para mover la ventana
         [DllImport("User32.DLL", EntryPoint = "SendMessage")] //importo las librerias necesarias para mover la ventana
         private extern static void SendMessage(System.IntPtr hwnd, int wmsg, int wparam, int lparam);
@@ -103,7 +103,7 @@ namespace VISTA
                     DialogResult result = MessageBox.Show("¿Está seguro de que desea modificar la computadora?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                     if (result == DialogResult.Yes)
                     {
-                        if (ControladoraComputadora.Instancia.RecuperarComputadoras().Any(c => c.CodigoComputadora.ToLower() == txtCodigoComputadora.Text.ToLower() && c.LaboratorioId == computadora.LaboratorioId && c.ComputadoraId != computadora.ComputadoraId))
+                        if (ControladoraComputadora.Instancia.RecuperarComputadoras().Any(c => c.CodigoComputadora.ToLower() == txtCodigoComputadora.Text.ToLower() && c.LaboratorioId == computadora.LaboratorioId && c.ComputadoraId != computadora.ComputadoraId))//se verifica si ya existe una computadora con ese código en el laboratorio seleccionado y que no sea la misma computadora que se está modificando para evitar que se modifique el código de una computadora por otro que ya existe en el mismo laboratorio y sede seleccionados 
                         {
                             MessageBox.Show("Ya existe una computadora con ese código en el laboratorio seleccionado.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                             return;

@@ -39,24 +39,10 @@ namespace Controladora
             }
         }
 
-        public ReadOnlyCollection<Laboratorio> RecuperarLaboratoriosPorSede(string nombreSede)
-        {
-            try
-            {
-                Context.Instancia.Laboratorios.ToList().AsReadOnly();
-                return Context.Instancia.Laboratorios.Where(l => l.Sede.NombreSede == nombreSede).ToList().AsReadOnly();
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
         public string AgregarLaboratorio(Laboratorio laboratorio)
         {
             try
             {
-                //se verifica que no exista un laboratorio con el mismo nombre en la misma sede
                 var listaLaboratorios = Context.Instancia.Laboratorios.ToList().AsReadOnly();
                 var laboratorioEncontrado = listaLaboratorios.FirstOrDefault(l => l.NombreLaboratorio.ToLower() == laboratorio.NombreLaboratorio.ToLower() && l.Sede.NombreSede == laboratorio.Sede.NombreSede); //busco el laboratorio por nombre y sede para verificar que no exista un laboratorio con el mismo nombre en la misma sede
                 if (laboratorioEncontrado == null)
@@ -70,7 +56,7 @@ namespace Controladora
                     else return $"El laboratorio no se ha podido agregar";
                 }
                 else return $"El laboratorio ya existe";
-               
+
             }
             catch (Exception ex)
             {
@@ -101,7 +87,6 @@ namespace Controladora
                 throw new Exception("Error al modificar el laboratorio", ex);
             }
         }
-
 
         public string EliminarLaboratorio(Laboratorio laboratorio)
         {

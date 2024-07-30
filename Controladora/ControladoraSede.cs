@@ -116,7 +116,7 @@ namespace Controladora
             {
                 var listaSedes = Context.Instancia.Sedes.ToList().AsReadOnly();
                 var sedeEncontrada = listaSedes.FirstOrDefault(s => s.NombreSede.ToLower() == sede.NombreSede.ToLower());
-                if (sedeEncontrada != null) //si la sede existe, la elimino
+                if (sedeEncontrada != null) 
                 {
                     Context.Instancia.Sedes.Remove(sede);
                     int insertados = Context.Instancia.SaveChanges();

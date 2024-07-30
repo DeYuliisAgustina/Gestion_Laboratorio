@@ -6,7 +6,7 @@ namespace VISTA
 {
     public partial class formLaboratorioAM : Form
     {
-        private Laboratorio laboratorio; // variable de tipo Sede para almacenar la sede que se va a modificar
+        private Laboratorio laboratorio; // variable de tipo laboratorio para almacenar la sede que se va a modificar
         private bool modificar = false;
 
         public formLaboratorioAM()
@@ -80,7 +80,7 @@ namespace VISTA
 
 
                         string NombreSede = cbSedes.Text; // se recupera el nombre de la sede seleccionada del combobox de sedes
-                        if (ControladoraLaboratorio.Instancia.RecuperarLaboratorios().Any(l => l.Sede.NombreSede.ToLower() == NombreSede.ToLower() && l.NombreLaboratorio.ToLower() == txtNombreLaboratorio.Text.ToLower() && l.LaboratorioId != laboratorio.LaboratorioId))
+                        if (ControladoraLaboratorio.Instancia.RecuperarLaboratorios().Any(l => l.Sede.NombreSede.ToLower() == NombreSede.ToLower() && l.NombreLaboratorio.ToLower() == txtNombreLaboratorio.Text.ToLower() && l.LaboratorioId != laboratorio.LaboratorioId))//valido que no exista un laboratorio con el mismo nombre en la misma sede que se va a modificar y que no sea el mismo laboratorio que se va a modificar
                         {
                             MessageBox.Show("Ya existe un laboratorio con ese nombre en la sede seleccionada.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                             return;

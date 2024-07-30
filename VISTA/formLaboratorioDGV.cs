@@ -14,7 +14,6 @@ namespace VISTA
 
         }
 
-        //Metodos para mover la ventana
         [DllImport("User32.DLL", EntryPoint = "ReleaseCapture")] //importo las librerias necesarias para mover la ventana
         private extern static void ReleaseCapture(); //metodo para mover la ventana
         [DllImport("User32.DLL", EntryPoint = "SendMessage")] //importo las librerias necesarias para mover la ventana
@@ -90,20 +89,20 @@ namespace VISTA
                 var listaLaboratorio = ControladoraLaboratorio.Instancia.RecuperarLaboratorios();
                 var listaSede = ControladoraSede.Instancia.RecuperarSedes();
 
-                var laboratorioEncontrado = listaLaboratorio.FirstOrDefault(l => l.NombreLaboratorio.ToLower().Contains(txtBuscarLaboratorio.Text.ToLower()));
-                var sedeEncontrada = listaSede.FirstOrDefault(s => s.NombreSede.ToLower().Contains(txtBuscarLaboratorio.Text.ToLower()));
+                var laboratorioEncontrado = listaLaboratorio.FirstOrDefault(l => l.NombreLaboratorio.ToLower().Contains(txtBuscarLaboratorio.Text.ToLower())); //busco el laboratorio por nombre en la lista de laboratorios 
+                var sedeEncontrada = listaSede.FirstOrDefault(s => s.NombreSede.ToLower().Contains(txtBuscarLaboratorio.Text.ToLower())); //busco la sede por nombre en la lista de sedes 
 
                 if (laboratorioEncontrado != null) //si se encuentra el laboratorio
                 {
                     dgvLaboratorio.DataSource = null; //limpio la grilla
-                    dgvLaboratorio.DataSource = new List<Laboratorio> { laboratorioEncontrado }; //agrego el laboratorio encontrado a la grilla
+                    dgvLaboratorio.DataSource = new List<Laboratorio> { laboratorioEncontrado }; //la lista que le paso a la grilla es solo el laboratorio encontrado
                     dgvLaboratorio.Columns["Computadoras"].Visible = false;
 
                 }
                 else if (sedeEncontrada != null) //si se encuentra la sede
                 {
                     dgvLaboratorio.DataSource = null;
-                    dgvLaboratorio.DataSource = listaLaboratorio.Where(l => l.SedeId == sedeEncontrada.SedeId).ToList(); //lo mismo que con laboratorio
+                    dgvLaboratorio.DataSource = listaLaboratorio.Where(l => l.SedeId == sedeEncontrada.SedeId).ToList(); //la lista que le paso a la grilla es la lista de laboratorios que pertenecen a la sede encontrada
                     dgvLaboratorio.Columns["Computadoras"].Visible = false;
 
                 }
@@ -111,7 +110,7 @@ namespace VISTA
                 {
                     MessageBox.Show("No se han encontrado los datos ingresados.");
                     ActualizarGrilla();
-                    dgvLaboratorio.Columns["Computadoras"].Visible = false;
+                    dgvLaboratorio.Columns["Computadoras"].Visible = false;//oculto la columna de computadoras para prolijidad
                 }
             }
             else

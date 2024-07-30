@@ -13,7 +13,6 @@ namespace VISTA
             dgvTecnico.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells; //con esto hago que las columnas se ajusten al contenido
         }
 
-        //Metodos para mover la ventana
         [DllImport("User32.DLL", EntryPoint = "ReleaseCapture")] //importo las librerias necesarias para mover la ventana
         private extern static void ReleaseCapture(); //metodo para mover la ventana
         [DllImport("User32.DLL", EntryPoint = "SendMessage")] //importo las librerias necesarias para mover la ventana
@@ -26,10 +25,10 @@ namespace VISTA
             dgvTecnico.Columns["Tickets"].Visible = false;
 
 
-            foreach (DataGridViewRow row in dgvTecnico.Rows)
+            foreach (DataGridViewRow row in dgvTecnico.Rows) //recorro todas las filas de la grilla para contar la cantidad de tickets que tiene cada tecnico y mostrarlo en la grilla
             {
-                var tecnico = (Tecnico)row.DataBoundItem;
-                row.Cells["CantidadTickets"].Value = ControladoraTicket.Instancia.ContarTicketsPorTecnico(tecnico);
+                var tecnico = (Tecnico)row.DataBoundItem; //con esto obtengo el objeto tecnico de la fila actual de la grilla y lo guardo en la variable tecnico
+                row.Cells["CantidadTickets"].Value = ControladoraTicket.Instancia.ContarTicketsPorTecnico(tecnico);//cuento la cantidad de tickets que tiene el tecnico y lo muestro en la grilla en la columna cantidad de tickets 
             }
         }
 
@@ -95,7 +94,7 @@ namespace VISTA
                 if (tecnicoEncontrado != null)
                 {
                     dgvTecnico.DataSource = null;
-                    dgvTecnico.DataSource = new List<Tecnico> { tecnicoEncontrado };
+                    dgvTecnico.DataSource = new List<Tecnico> { tecnicoEncontrado }; //con esto muestro en la grilla solo el tecnico encontrado y no todos los tecnicos
                 }
                 else
                 {
