@@ -26,10 +26,10 @@ namespace VISTA
         private void ActualizarGrilla()
         {
             dgvTicket.DataSource = null;
-            dgvTicket.DataSource = ControladoraSede.Instancia.RecuperarSedes(); // Recupero las sedes de la base de datos y las muestro en la grilla 
-            dgvTicket.DataSource = ControladoraComputadora.Instancia.RecuperarComputadoras();
-            dgvTicket.DataSource = ControladoraLaboratorio.Instancia.RecuperarLaboratorios();
-            dgvTicket.DataSource = ControladoraTecnico.Instancia.RecuperarTecnicos();
+            dgvTicket.DataSource = ControladoraTicket.Instancia.RecuperarSedes(); // Recupero las sedes de la base de datos y las muestro en la grilla 
+            dgvTicket.DataSource = ControladoraTicket.Instancia.RecuperarComputadoras();
+            dgvTicket.DataSource = ControladoraTicket.Instancia.RecuperarLaboratorios();
+            dgvTicket.DataSource = ControladoraTicket.Instancia.RecuperarTecnicos();
             dgvTicket.DataSource = ControladoraTicket.Instancia.RecuperarTicket();
             dgvTicket.Columns["Laboratorios"].Visible = false;
 

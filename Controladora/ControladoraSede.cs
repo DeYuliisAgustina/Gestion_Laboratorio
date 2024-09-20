@@ -37,7 +37,7 @@ namespace Controladora
             {
                 throw;
             }
-        }        
+        }
 
         public Universidad RecuperarUniversidad()
         {
@@ -45,6 +45,19 @@ namespace Controladora
             {
                 Context.Instancia.Universidades.FirstOrDefault(u => u.NombreUniversidad == "UAI");
                 return Context.Instancia.Universidades.FirstOrDefault(u => u.NombreUniversidad == "UAI");
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public ReadOnlyCollection<Laboratorio> RecuperarLaboratorios()
+        {
+            try
+            {
+                Context.Instancia.Laboratorios.ToList().AsReadOnly();
+                return Context.Instancia.Laboratorios.ToList().AsReadOnly();
             }
             catch (Exception)
             {

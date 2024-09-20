@@ -27,7 +27,7 @@ namespace Modelo
         protected override void OnConfiguring(DbContextOptionsBuilder options)
         {
             options.EnableSensitiveDataLogging(true);
-            options.UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=SistemaGestion;Trusted_Connection=True;");
+            options.UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=GestionLaboratorio;Trusted_Connection=True;");
         }
 
     }

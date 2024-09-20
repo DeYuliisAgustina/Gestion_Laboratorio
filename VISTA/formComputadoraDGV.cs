@@ -22,7 +22,7 @@ namespace VISTA
         private void ActualizarGrilla()
         {
             dgvComputadora.DataSource = null;
-            dgvComputadora.DataSource = ControladoraLaboratorio.Instancia.RecuperarLaboratorios();
+            dgvComputadora.DataSource = ControladoraComputadora.Instancia.RecuperarLaboratorios();
             dgvComputadora.DataSource = ControladoraComputadora.Instancia.RecuperarComputadoras();
             dgvComputadora.Columns["Tickets"].Visible = false;
         }

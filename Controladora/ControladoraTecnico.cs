@@ -39,6 +39,19 @@ namespace Controladora
             }
         }
 
+        public ReadOnlyCollection<Ticket> RecuperarTickets()
+        {
+            try
+            {
+                Context.Instancia.Tickets.ToList().AsReadOnly();
+                return Context.Instancia.Tickets.ToList().AsReadOnly();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public string AgregarTecnico(Tecnico tecnico)
         {
             try

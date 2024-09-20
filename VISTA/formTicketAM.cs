@@ -35,14 +35,14 @@ namespace VISTA
 
         public void Actualizarcb()
         {
-            foreach (Sede sede in ControladoraSede.Instancia.RecuperarSedes()) //se recorren las sedes y se agregan al cmb
+            foreach (Sede sede in ControladoraTicket.Instancia.RecuperarSedes()) //se recorren las sedes y se agregan al cmb
             {
                 cbSede.Items.Add(sede.NombreSede.ToString());
             }
             cbSede.SelectedIndexChanged += (s, e) =>  //se agrega un evento al cmb para que al seleccionar una sede se actualice el cmb de laboratorios
             {
                 cbLaboratorio.Items.Clear();  //se limpia el cmb de laboratorios
-                foreach (Laboratorio laboratorio in ControladoraLaboratorio.Instancia.RecuperarLaboratorios().Where(l => l.Sede.NombreSede == cbSede.SelectedItem.ToString())) //se recorren los laboratorios y se agregan al cmb
+                foreach (Laboratorio laboratorio in ControladoraTicket.Instancia.RecuperarLaboratorios().Where(l => l.Sede.NombreSede == cbSede.SelectedItem.ToString())) //se recorren los laboratorios y se agregan al cmb
                 {
                     cbLaboratorio.Items.Add(laboratorio.NombreLaboratorio.ToString());
                 }
@@ -50,7 +50,7 @@ namespace VISTA
             cbLaboratorio.SelectedIndexChanged += (s, e) =>  //se agrega un evento al cmb para que al seleccionar un laboratorio se actualice el cmb de computadoras
             {
                 cbCodigoPc.Items.Clear();  //se limpia el cmb de computadoras
-                foreach (Computadora computadora in ControladoraComputadora.Instancia.RecuperarComputadoras().Where(c => c.Laboratorio.NombreLaboratorio == cbLaboratorio.SelectedItem.ToString())) //se recorren las computadoras y se agregan al cmb
+                foreach (Computadora computadora in ControladoraTicket.Instancia.RecuperarComputadoras().Where(c => c.Laboratorio.NombreLaboratorio == cbLaboratorio.SelectedItem.ToString())) //se recorren las computadoras y se agregan al cmb
                 {
                     cbCodigoPc.Items.Add(computadora.CodigoComputadora.ToString());
                 }
@@ -143,8 +143,8 @@ namespace VISTA
                         }
                         ticket.NombreSede = cbSede.SelectedItem.ToString();
                         ticket.Ubicacion = cbLaboratorio.SelectedItem.ToString(); 
-                        ticket.Computadora = ControladoraComputadora.Instancia.RecuperarComputadoras().FirstOrDefault(c => c.CodigoComputadora == cbCodigoPc.SelectedItem.ToString() && c.Laboratorio.NombreLaboratorio == cbLaboratorio.SelectedItem.ToString());
-                        ticket.Tecnico = ControladoraTecnico.Instancia.RecuperarTecnicos().FirstOrDefault(t => t.NombreyApellido == cbTecnico.SelectedItem.ToString());
+                        ticket.Computadora = ControladoraTicket.Instancia.RecuperarComputadoras().FirstOrDefault(c => c.CodigoComputadora == cbCodigoPc.SelectedItem.ToString() && c.Laboratorio.NombreLaboratorio == cbLaboratorio.SelectedItem.ToString());
+                        ticket.Tecnico = ControladoraTicket.Instancia.RecuperarTecnicos().FirstOrDefault(t => t.NombreyApellido == cbTecnico.SelectedItem.ToString());
 
                         ticket.DescripcionTicket = txtDescripcion.Text;
                         ticket.FechaCreacion = dtpFechaInicio.Value;
@@ -167,8 +167,8 @@ namespace VISTA
                 {
                     ticket.NombreSede = cbSede.SelectedItem.ToString();
                     ticket.Ubicacion = cbLaboratorio.SelectedItem.ToString();
-                    ticket.Computadora = ControladoraComputadora.Instancia.RecuperarComputadoras().FirstOrDefault(c => c.CodigoComputadora == cbCodigoPc.SelectedItem.ToString() && c.Laboratorio.NombreLaboratorio == cbLaboratorio.SelectedItem.ToString()); //se recupera la computadora seleccionada y se asigna al ticket 
-                    ticket.Tecnico = ControladoraTecnico.Instancia.RecuperarTecnicos().FirstOrDefault(t => t.NombreyApellido == cbTecnico.SelectedItem.ToString()); //se recupera el tecnico seleccionado y se asigna al ticket
+                    ticket.Computadora = ControladoraTicket.Instancia.RecuperarComputadoras().FirstOrDefault(c => c.CodigoComputadora == cbCodigoPc.SelectedItem.ToString() && c.Laboratorio.NombreLaboratorio == cbLaboratorio.SelectedItem.ToString()); //se recupera la computadora seleccionada y se asigna al ticket 
+                    ticket.Tecnico = ControladoraTicket.Instancia.RecuperarTecnicos().FirstOrDefault(t => t.NombreyApellido == cbTecnico.SelectedItem.ToString()); //se recupera el tecnico seleccionado y se asigna al ticket
 
                     ticket.DescripcionTicket = txtDescripcion.Text;
                     ticket.FechaCreacion = dtpFechaInicio.Value;

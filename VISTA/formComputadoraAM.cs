@@ -33,14 +33,14 @@ namespace VISTA
 
         private void ActualizarCb()
         {
-            foreach (Sede sede in ControladoraSede.Instancia.RecuperarSedes()) //se recorren las sedes y se agregan al cmb
+            foreach (Sede sede in ControladoraComputadora.Instancia.RecuperarSedes()) //se recorren las sedes y se agregan al cmb
             {
                 cbSede.Items.Add(sede.NombreSede.ToString()); //se agrega el nombre de la sede al cmb
             }
             cbSede.SelectedIndexChanged += (s, e) =>  //con este evento al seleccionar una sede actualizo el cmb de laboratorios
             {
                 cbLaboratorio.Items.Clear();  //se limpia el cmb de laboratorios para que no se acumulen los laboratorios de las sedes anteriores
-                foreach (Laboratorio laboratorio in ControladoraLaboratorio.Instancia.RecuperarLaboratorios().Where(l => l.Sede.NombreSede == cbSede.SelectedItem.ToString())) //se recorren los laboratorios y se agregan al cmb
+                foreach (Laboratorio laboratorio in ControladoraComputadora.Instancia.RecuperarLaboratorios().Where(l => l.Sede.NombreSede == cbSede.Text)) //se recorren los laboratorios y se agregan al cmb de laboratorios
                 {
                     cbLaboratorio.Items.Add(laboratorio.NombreLaboratorio.ToString());
                 }
@@ -110,7 +110,7 @@ namespace VISTA
                         }
 
                         computadora.NombreSede = cbSede.Text; // se recupera el nombre de la sede seleccionada del combobox de sedes
-                        computadora.Laboratorio = ControladoraLaboratorio.Instancia.RecuperarLaboratorios().FirstOrDefault(l => l.NombreLaboratorio == cbLaboratorio.Text); //se recupera el laboratorio seleccionado del combobox de laboratorios
+                        computadora.Laboratorio = ControladoraComputadora.Instancia.RecuperarLaboratorios().FirstOrDefault(l => l.NombreLaboratorio == cbLaboratorio.Text); //se recupera el laboratorio seleccionado del combobox de laboratorios
                         computadora.LaboratorioId = computadora.Laboratorio.LaboratorioId; //se asigna el id del laboratorio seleccionado a la
                         computadora.NombreSede = computadora.Laboratorio.Sede.NombreSede; //se asigna el nombre de la sede del laboratorio seleccionado a la
 
@@ -134,7 +134,7 @@ namespace VISTA
                 {
 
                     computadora.NombreSede = cbSede.Text; // se recupera el nombre de la sede seleccionada del combobox de sedes
-                    computadora.Laboratorio = ControladoraLaboratorio.Instancia.RecuperarLaboratorios().FirstOrDefault(l => l.NombreLaboratorio == cbLaboratorio.Text); //se recupera el laboratorio seleccionado del combobox de laboratorios
+                    computadora.Laboratorio = ControladoraComputadora.Instancia.RecuperarLaboratorios().FirstOrDefault(l => l.NombreLaboratorio == cbLaboratorio.Text); //se recupera el laboratorio seleccionado del combobox de laboratorios
                     computadora.LaboratorioId = computadora.Laboratorio.LaboratorioId; //se asigna el id del laboratorio seleccionado a la
                     computadora.NombreSede = computadora.Laboratorio.Sede.NombreSede; //se asigna el nombre de la sede del laboratorio seleccionado a la
 

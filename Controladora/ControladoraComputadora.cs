@@ -31,13 +31,41 @@ namespace Controladora
         {
             try
             {
-                Context.Instancia.Computadoras.Include(c => c.Laboratorio).ToList().AsReadOnly();
-                return Context.Instancia.Computadoras.Include(c => c.Laboratorio).ToList().AsReadOnly();
+                Context.Instancia.Computadoras.ToList().AsReadOnly();
+                return Context.Instancia.Computadoras.ToList().AsReadOnly();
 
             }
             catch (Exception ex)
             {
-                throw ex;   
+                throw ex;
+            }
+        }
+
+        public ReadOnlyCollection<Laboratorio> RecuperarLaboratorios()
+        {
+            try
+            {
+                Context.Instancia.Laboratorios.ToList().AsReadOnly();
+                return Context.Instancia.Laboratorios.ToList().AsReadOnly();
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public ReadOnlyCollection<Sede> RecuperarSedes()
+        {
+            try
+            {
+                Context.Instancia.Sedes.ToList().AsReadOnly();
+                return Context.Instancia.Sedes.ToList().AsReadOnly();
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
             }
         }
 

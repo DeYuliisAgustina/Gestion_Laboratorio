@@ -39,6 +39,58 @@ namespace Controladora
             }
         }
 
+        public ReadOnlyCollection<Sede> RecuperarSedes()
+        {
+            try
+            {
+                Context.Instancia.Sedes.ToList().AsReadOnly();
+                return Context.Instancia.Sedes.ToList().AsReadOnly();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public ReadOnlyCollection<Laboratorio> RecuperarLaboratorios()
+        {
+            try
+            {
+                Context.Instancia.Laboratorios.ToList().AsReadOnly();
+                return Context.Instancia.Laboratorios.ToList().AsReadOnly();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public ReadOnlyCollection<Computadora> RecuperarComputadoras()
+        {
+            try
+            {
+                Context.Instancia.Computadoras.ToList().AsReadOnly();
+                return Context.Instancia.Computadoras.ToList().AsReadOnly();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public ReadOnlyCollection<Tecnico> RecuperarTecnicos()
+        {
+            try
+            {
+                Context.Instancia.Tecnicos.ToList().AsReadOnly();
+                return Context.Instancia.Tecnicos.ToList().AsReadOnly();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public string AgregarTicket(Ticket ticket)
         {
             try

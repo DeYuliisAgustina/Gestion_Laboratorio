@@ -39,6 +39,19 @@ namespace Controladora
             }
         }
 
+        public ReadOnlyCollection<Sede>RecuperarSedes()
+        {
+            try
+            {
+                Context.Instancia.Sedes.ToList().AsReadOnly();
+                return Context.Instancia.Sedes.ToList().AsReadOnly();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public string AgregarLaboratorio(Laboratorio laboratorio)
         {
             try

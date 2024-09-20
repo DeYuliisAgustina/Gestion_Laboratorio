@@ -32,7 +32,7 @@ namespace VISTA
 
         public void ActualizarCb()
         {
-            foreach (Sede sede in ControladoraSede.Instancia.RecuperarSedes()) // se recorren las sedes para agregarlas al combobox de sedes para que el usuario pueda seleccionar una sede para el laboratorio que se va a modificar
+            foreach (Sede sede in ControladoraLaboratorio.Instancia.RecuperarSedes()) // se recorren las sedes para agregarlas al combobox de sedes para que el usuario pueda seleccionar una sede para el laboratorio que se va a modificar
             {
                 cbSedes.Items.Add(sede.NombreSede.ToString());
             }
@@ -85,7 +85,7 @@ namespace VISTA
                             MessageBox.Show("Ya existe un laboratorio con ese nombre en la sede seleccionada.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                             return;
                         }
-                        laboratorio.Sede = ControladoraSede.Instancia.RecuperarSedes().FirstOrDefault(s => s.NombreSede.ToLower() == NombreSede.ToLower()); // se recupera la sede seleccionada del combobox de sedes para asignarla al laboratorio que se va a modificar
+                        laboratorio.Sede = ControladoraLaboratorio.Instancia.RecuperarSedes().FirstOrDefault(s => s.NombreSede.ToLower() == NombreSede.ToLower()); // se recupera la sede seleccionada del combobox de sedes para asignarla al laboratorio que se va a modificar
                         laboratorio.CapacidadMaxima = (int)numCapacidad.Value; 
                         laboratorio.NombreLaboratorio = txtNombreLaboratorio.Text;
 
@@ -100,7 +100,7 @@ namespace VISTA
                 else
                 {
                     string NombreSede = cbSedes.Text; // se recupera el nombre de la sede seleccionada del combobox de sedes
-                    laboratorio.Sede = ControladoraSede.Instancia.RecuperarSedes().FirstOrDefault(s => s.NombreSede.ToLower() == NombreSede.ToLower()); // se recupera la sede seleccionada del combobox de sedes para asignarla al laboratorio que se va a modificar
+                    laboratorio.Sede = ControladoraLaboratorio.Instancia.RecuperarSedes().FirstOrDefault(s => s.NombreSede.ToLower() == NombreSede.ToLower()); // se recupera la sede seleccionada del combobox de sedes para asignarla al laboratorio que se va a modificar
                     laboratorio.CapacidadMaxima = (int)numCapacidad.Value;
                     laboratorio.NombreLaboratorio = txtNombreLaboratorio.Text;
 
