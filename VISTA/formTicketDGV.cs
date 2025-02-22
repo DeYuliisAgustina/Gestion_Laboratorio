@@ -79,7 +79,7 @@ namespace VISTA
             {
                 var ticketSeleccionado = (Ticket)dgvTicket.CurrentRow.DataBoundItem; // Recupero el ticket seleccionado de la grilla y lo guardo en una variable de tipo Ticket para luego modificarlo  
                 formTicketAM formTicketAM = new formTicketAM(ticketSeleccionado); //aca le paso el ticket seleccionado a la ventana de modificacion de ticket para que se carguen los datos del ticket seleccionado en los campos de texto
-                formTicketAM.ShowDialog(); 
+                formTicketAM.ShowDialog();
             }
             else
             {
@@ -184,7 +184,7 @@ namespace VISTA
                                 paginahtml_ticket = paginahtml_ticket.Replace("@tipo", ticket.tipo.ToString());
 
                                 var listaTecnicos = ControladoraTecnico.Instancia.RecuperarTecnicos();
-                                foreach (var tecnico in listaTecnicos) 
+                                foreach (var tecnico in listaTecnicos)
                                 {
                                     if (tecnico.TecnicoId == ticket.TecnicoId) // Si el id del técnico es igual al id del técnico del ticket, muestro el nombre y apellido del técnico y la cantidad de tickets que tiene asignados en el PDF
                                     {
@@ -198,8 +198,8 @@ namespace VISTA
                                     XMLWorkerHelper.GetInstance().ParseXHtml(writer, pdfDoc, sr); //Parseo el archivo HTML a PDF
                                 }
                             }
-                           
-                            pdfDoc.Close(); 
+
+                            pdfDoc.Close();
                         }
                         stream.Close();
                     }
@@ -258,6 +258,11 @@ namespace VISTA
                 e.Handled = true;
             }
             return e;
+        }
+
+        private void dgvTicket_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

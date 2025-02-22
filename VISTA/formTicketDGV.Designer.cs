@@ -48,6 +48,7 @@
             dgvTicket.RowTemplate.Height = 25;
             dgvTicket.Size = new Size(749, 314);
             dgvTicket.TabIndex = 0;
+            dgvTicket.CellContentClick += dgvTicket_CellContentClick;
             // 
             // btnAgregar
             // 
